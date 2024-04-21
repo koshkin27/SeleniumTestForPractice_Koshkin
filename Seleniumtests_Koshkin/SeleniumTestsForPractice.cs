@@ -223,14 +223,14 @@ public class SeleniumTestsForPractice
         var deleteButton1 = driver.FindElement(By.CssSelector("[data-tid='DeleteButton']"));
         deleteButton1.Click();
         
+        // перейти в раздел мероприятий
+        driver.Navigate().GoToUrl("https://staff-testing.testkontur.ru/files");
+        
         // проверка, что мы перешли на страницу файлов
         driver.FindElement(By.CssSelector("[data-tid='Title']"));
-        
+
         // проверка удаления папки
-        var findThisFolder = driver.FindElement(By.XPath("//div[text()='"+folderName+"']")).Displayed; 
-        // тут у меня действительно ошибка, селениум почему то все равно видит эту папку и возвращает true
-        // смотрел через девтулз - папка на стаффе отсутствует
-        // (ошибка только в строке 230, до нее все отрабатывается корректно)
+        var findThisFolder = driver.FindElements(By.XPath("//div[text()='"+folderName+"']")).Any(); 
         findThisFolder.Should().BeFalse();
     }
     
